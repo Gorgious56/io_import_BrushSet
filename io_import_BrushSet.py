@@ -33,7 +33,7 @@ from bpy.types import (
     OperatorFileListElement,
 )
 
-# addon description
+# Addon description
 bl_info = {
     "name": "Import BrushSet",
     "author": "Daniel Grauer (kromar), CansecoGPC, Gorgious56",
@@ -49,7 +49,7 @@ bl_info = {
 
 #---------------------------------------------#
 
-# extension filter (alternative use mimetypes)
+# Extension filter (alternative use mimetypes)
 # TODO: rewrite so it tries to load image and if it fails we know its not a format blender can load
 ext_list = ['.bmp',
             '.png',
@@ -102,7 +102,7 @@ class BrushSetImporter(Operator):
     '''Load Brush Set'''
     bl_idname = "import_image.brushset"
     bl_label = "Import BrushSet"
-    
+
     use_fake_user: BoolProperty(name="Fake User", description="Import Textures and Images with Fake User")
     verbose: BoolProperty(name="Verbose Output", description="Verbose output in the System Console")
     overwrite: BoolProperty(name="Overwrite", description="Overwrite Image & Texture if already loaded in file")
@@ -110,12 +110,11 @@ class BrushSetImporter(Operator):
     files: CollectionProperty(
         type=OperatorFileListElement,
         options={'HIDDEN', 'SKIP_SAVE'},
-        )
-    
+        )    
     directory: StringProperty(
         name="Selected Directory",
-        description="Where I will save my stuff",
         )
+
     def execute(self, context):
         LoadBrushSet(self.directory, self.files, self.use_fake_user, self.verbose, self.overwrite)
         return {'FINISHED'}
